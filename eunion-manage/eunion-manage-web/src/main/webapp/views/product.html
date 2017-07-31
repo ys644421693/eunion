@@ -1,0 +1,208 @@
+<div>
+    <div id="main">
+        <p ng-if="!isProperties"><a href="#" class="button" title="新增商品" id="dialog_link" data-toggle="modal"
+                                    data-target="#product" ng-click="showModal()"><span
+                class="ui-icon ui-icon-plusthick"></span>新增商品</a></p>
+        <table ng-if="!isProperties" class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <td>序号</td>
+                <td>商品名称</td>
+                <td>价格（元）</td>
+                <td>总量</td>
+                <td>销量</td>
+                <td>状态</td>
+                <td>首页</td>
+                <td>上架时间</td>
+                <td style="width: 20%">操作</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="{{$index%2==0?'':'odd'}}" ng-repeat="row in productAll">
+                <td ng-bind="row.id"></td>
+                <td ng-bind="row.name"></td>
+                <td ng-bind="row.price"></td>
+                <td ng-bind="row.quantity"></td>
+                <td ng-bind="row.salesVolume"></td>
+                <td ng-bind="row.state=='01'?'正常':'其他'"></td>
+                <td ng-bind="row.isHome?'是':'否'"></td>
+                <td ng-bind="row.createTime | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                <td><input class="btn btn-warning btn-xs" type="button" value="修改" data-toggle="modal"
+                           data-target="#product" ng-click="showData(row)">
+                    <input class="btn btn-danger btn-xs" type="button" value="删除" ng-click="deleteProduct(row)">
+                    <input class="btn btn-info btn-xs" type="button" value="属性" ng-click="showProperties(row)">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div id="properties" class="form-horizontal " ng-if="isProperties">
+            <div class="page-header">
+                <h3>商品：
+                    <small ng-bind="propertiesProduct.name"></small>
+                    <span style="float: right">
+                        <select class="select-eunion" ng-model="newProperties"
+                                ng-options="p.name for p in backProperties">
+                            <option value="">---请选择---</option>
+                        </select>
+                        <input type="button" class="btn btn-primary btn-xs" value="添加基础属性"
+                               ng-click="addNewProperties(newProperties);newProperties='';">
+                         <input type="button" class="btn btn-primary btn-xs" value="修改基础属性"
+                                ng-click="updateNewPro(newProperties);newProperties='';">
+                        <input type="button" class="btn btn-danger btn-xs" value="删除基础属性"
+                               ng-click="deleteNewPro(newProperties);newProperties='';">
+                        <input type="button" class="btn btn-primary btn-xs" value="新增基础属性" ng-click="addNewPro()">
+                    </span>
+                </h3>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-offset-2 col-lg-9 " ng-repeat="row in properties">
+                    <div class="bs-callout bs-callout-info">
+                        <div class="zero-clipboard">
+                            <span class="btn btn-primary btn-xs btn-clipboard"
+                                  ng-click="addProperties(row.data)">添加</span>
+                            <span class="btn btn-danger btn-xs btn-clipboard-eunion"
+                                  ng-click="deleteProperties(row.properties)">删除</span>
+                        </div>
+                        <h4 ng-bind="row.properties.name"></h4>
+                        <hr/>
+                        <div ng-repeat="p in row.data">
+                            <div id="defaultForm_{{$index}}" class="form-horizontal">
+                                <compoment type="row.properties" data="p" dl-function="dlProperties"></compoment>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <input type="button" value="保存" class="btn btn-primary btn-sm" ng-click="saveProperties()">
+                <input type="button" value="返回" class="btn btn-default btn-sm" ng-click="backList()">
+            </div>
+        </div>
+        <div class="modal fade" id="product" tabindex="-1" role="dialog" aria-labelledby="role">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">新增商品</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="defaultForm" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">商品名称：</label>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" name="name" ng-model="product.name"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">价格：</label>
+                                <div class="col-lg-8">
+                                    <input type="number" class="form-control" name="price" ng-model="product.price"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">总量：</label>
+                                <div class="col-lg-8">
+                                    <input type="number" class="form-control" name="quantity"
+                                           ng-model="product.quantity"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">是否在主页：</label>
+                                <div class="col-lg-8">
+                                    <input type="checkbox" name="isHome" ng-model="product.isHome"/>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="product.isHome">
+                                <label class="col-lg-3 control-label">首页排序：</label>
+                                <div class="col-lg-8">
+                                    <input type="number" class="form-control" name="name" ng-model="product.sort"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">商品描述：</label>
+                                <div class="col-lg-8">
+                                    <textarea id="description" name="description" style="width: 370px"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="addProduct()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="baseProperty" tabindex="-1" role="dialog" aria-labelledby="role">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="baseProperties" ng-bind="pro.id?'属性修改':'新增属性'"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="propertiesForm" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">属性名称：</label>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" name="name" ng-model="pro.name"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">数据类型：</label>
+                                <div class="col-lg-8">
+                                    <select class="form-control" ng-model="pro.target">
+                                        <option value="">------请选择------</option>
+                                        <option value="file">图片</option>
+                                        <option value="file">视频</option>
+                                        <option value="text">文字</option>
+                                        <option value="number">数字</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">默认值：</label>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" name="quantity" ng-model="pro.value"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="addPro()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" id="tip" role="dialog" aria-labelledby="mySmallModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">
+                    </span><span class="sr-only">Close</span></button>
+                </div>
+                <div ng-repeat="d in files">
+                    <span ng-bind="d.name"></span>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuemin="0"
+                             aria-valuemax="100" style="width:{{d.percent}}%" ng-bind="d.percent + '%'">
+                        </div>
+                    </div>
+                    <span ng-bind="d.percent + '%'"></span><br>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

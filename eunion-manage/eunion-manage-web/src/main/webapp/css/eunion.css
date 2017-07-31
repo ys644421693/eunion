@@ -1,0 +1,53 @@
+.text-style-eunion {
+    clear: both;
+    BORDER-RIGHT: #9a9999 0px solid;
+    BORDER-TOP: #9a9999 0px solid;
+    BORDER-LEFT: #9a9999 0px solid;
+    WIDTH: 80px;
+    BORDER-BOTTOM: #9a9999 1px solid
+}
+
+.title-eunion {
+    margin-top: 0;
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: 3px;
+    position: relative;
+    background-color: #e7e7e7;
+    width: 100%;
+}
+
+.btn-clipboard-eunion {
+    position: absolute;
+    top: 0;
+    right: 50px;
+    z-index: 9;
+    display: block;
+    padding: 5px 8px;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+    background-color: #d9534f;
+    border: 1px solid #d43f3a;
+    border-radius: 0 4px 0 4px;
+}
+
+.select-eunion {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.footer {
+    height: 120px;
+}
+
+.sidebar-menu-union {
+    float: left;
+    width: 280px;
+    padding-top: 1px;
+    position: relative;
+}
+.fa{
+    color: #a7b1c2;
+}

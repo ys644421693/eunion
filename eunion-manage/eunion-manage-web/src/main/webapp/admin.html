@@ -1,0 +1,113 @@
+<html>
+<head>
+    <!-- Meta -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- End of Meta -->
+
+    <!-- Page title -->
+    <title>管理中心</title>
+    <!-- End of Page title -->
+
+    <!-- Libraries -->
+    <link type="text/css" href="/css/layout.css" rel="stylesheet">
+    <link type="text/css" href="/css/eunion.css" rel="stylesheet">
+    <link type="text/css" href="/css/docs.min.css" rel="stylesheet">
+    <link type="text/css" href="/css/font-awesome.css" rel="stylesheet">
+    <link type="text/css" href="/css/sidebar-menu.css" rel="stylesheet">
+
+    <!-- End of Libraries -->
+</head>
+<body>
+<!-- Container -->
+<div>
+    <!-- Header -->
+    <div id="header">
+
+        <!-- Top -->
+        <div id="top">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="#" title="Administration Home"><img src="/assets/logo.png" alt="Admin"></a>
+            </div>
+            <!-- End of Logo -->
+
+            <!-- Meta information -->
+            <div class="meta">
+                <p>欢迎, Admin! <a href="#" title="1 new private message from Elaine!" >无消息!</a></p>
+                <ul>
+                    <li><a href="#" title="End administrator session" ><span
+                            class="ui-icon ui-icon-power"></span>退出</a></li>
+                    <li><a href="#" title="Go to your account" ><span
+                            class="ui-icon ui-icon-person"></span>我的账户</a></li>
+                </ul>
+            </div>
+            <!-- End of Meta information -->
+        </div>
+        <!-- End of Top-->
+
+        <!-- The navigation bar -->
+        <div id="navbar">
+            <ul class="nav sf-js-enabled sf-shadow">
+                <li ui-sref="index"><a href="#"><span class="ui-icon ui-icon-newwin">控制面板</span></a></li>
+                <li ui-sref="userList"><a href="#">用户列表</a></li>
+                <li ui-sref="notice"><a href="#">通知</a></li>
+
+            </ul>
+        </div>
+        <!-- End of navigation bar" -->
+
+        <!-- Search bar -->
+        <div id="search">
+            <form action="http://unithemes.net/search/" method="POST">
+                <p>
+                    <input type="submit" value="" class="but">
+                    <input type="text" name="q" value="搜索"
+                           onfocus="if(this.value==this.defaultValue)this.value='';"
+                           onblur="if(this.value=='')this.value=this.defaultValue;">
+                </p>
+            </form>
+        </div>
+    </div>
+    <div ui-view="content"></div>
+<!-- End of Container -->
+
+<!-- Footer -->
+    <div id="footer">
+        <p class="mid">
+            <a href="#" title="Top" class="tooltip">Top</a>·<a href="#" title="Main Page" class="tooltip">Home</a>·<a href="#" title="Change current settings" class="tooltip">Settings</a>·<a href="#" title="End administrator session" class="tooltip">Logout</a>
+        </p>
+        <p class="mid">
+            <!-- Change this to your own once purchased -->
+            © Wide Admin 2010. All rights reserved.
+            <!-- -->
+        </p>
+    </div>
+
+</div>
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all  ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-dialog" style="display: none; position: absolute; overflow: hidden; z-index: 1003; outline: 0px; height: auto; width: 500px; top: 2125px; left: 698px;">
+    <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix" unselectable="on">
+        <span class="ui-dialog-title" id="ui-dialog-title-dialog" unselectable="on">Welcome message!</span>
+        <a href="#" class="ui-dialog-titlebar-close ui-corner-all" role="button" unselectable="on">
+            <span class="ui-icon ui-icon-closethick" unselectable="on">close</span>
+        </a>
+    </div>
+    <div id="dialog" class="ui-dialog-content ui-widget-content" style="height: auto; min-height: 57px; width: auto;">
+        <p>Welcome to <b>Wide Admin</b>!</p>
+        <p>Wide Admin is one powerful customizable backend user interface. Check the demo to see what it can do!</p>
+        <p>And this is a custom message text that you can modify to fit your needs.</p>
+    </div>
+    <div class="ui-resizable-handle ui-resizable-n" unselectable="on"></div><div class="ui-resizable-handle ui-resizable-e" unselectable="on"></div>
+    <div class="ui-resizable-handle ui-resizable-s" unselectable="on"></div><div class="ui-resizable-handle ui-resizable-w" unselectable="on"> </div>
+    <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se ui-icon-grip-diagonal-se" unselectable="on" style="z-index: 1001;"> </div>
+    <div class="ui-resizable-handle ui-resizable-sw" unselectable="on" style="z-index: 1002;"></div>
+    <div class="ui-resizable-handle ui-resizable-ne" unselectable="on" style="z-index: 1003;"></div>
+    <div class="ui-resizable-handle ui-resizable-nw" unselectable="on" style="z-index: 1004;"></div>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <button type="button" class="ui-state-default ui-corner-all">Ok</button>
+        <button type="button" class="ui-state-default ui-corner-all">Cancel</button>
+    </div>
+</div>
+</body>
+<!-- End of Footer -->
+<script type='text/javascript' src='/lib/require.js' data-main='/js/main.js'></script>
+</html>

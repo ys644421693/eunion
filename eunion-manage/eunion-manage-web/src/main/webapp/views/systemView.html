@@ -1,0 +1,48 @@
+<div id="bgwrap">
+
+    <!-- Main Content -->
+    <div id="content">
+        <div ui-view="panelPage"></div>
+
+    </div>
+    <!-- End of Main Content -->
+    <!-- Sidebar -->
+    <aside class="main-sidebar sidebar-menu-union" id="menu-e-union">
+        <section class="sidebar">
+            <tree-list></tree-list>
+            <!--<ul class="sidebar-menu">
+                <li class="header"><i class="fa fa-dashboard"></i><span>MAIN NAVIGATION</span></li>
+                <tree-list></tree-list>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i
+                            class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                    </ul>
+                </li>
+            </ul>-->
+        </section>
+        <!--<tree-list></tree-list>-->
+        <!-- End of Lists -->
+    </aside>
+    <script>
+        $.sidebarMenu($('.sidebar-menu'));
+        window.onresize=autoDivHeight;
+        function autoDivHeight(){
+            var height =$(document.body).height()- 250;
+            if(height > 100){
+                $("#menu-e-union").css("height",height + "px");
+                $("#bgwrap").css("height",height + "px");
+                $("#content").css("height",height + "px");
+            }
+        }
+        autoDivHeight();
+    </script>
+
+    <!-- End of Lists -->
+
+    <!-- End of Sidebar -->
+</div>

@@ -1,0 +1,72 @@
+{
+  "id": 11,
+  "type": "content",
+  "select": [
+    {
+      "id": 10,
+      "title": "组件",
+      "controller":"",
+      "index":"zujian",
+      "directive":"",
+      "service":"",
+      "type":"json",
+      "valueList": [
+        {
+          "id":12,
+          "dataUrl":"js/data/pageJson.json",
+          "name":"测试用例1",
+          "function":"jsonToHtml"
+        },{
+          "id":12,
+          "dataUrl":"js/data/pageJson.json",
+          "name":"测试用例1",
+          "function":"jsonToHtml"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "模板",
+      "controller":"",
+      "index":"muban",
+      "directive":"",
+      "service":"",
+      "type":"html",
+      "valueList": [
+        {
+          "id":12,
+          "dataUrl":"../json/pageJson.json",
+          "name":"html测试用例1",
+          "function":"getLoadHtmls"
+        },{
+          "id":12,
+          "dataUrl":"../json/pageJson.json",
+          "name":"html测试用例2",
+          "function":"getLoadHtmls"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "模板",
+      "controller":"",
+      "directive":"",
+      "service":"",
+      "type":"html",
+      "index":"mubantwo",
+      "valueList": [
+        {
+          "id":12,
+          "dataUrl":"../json/pageJson.json",
+          "name":"html测试用例1",
+          "function":"getLoadHtml"
+        },{
+          "id":12,
+          "dataUrl":"../json/pageJson.json",
+          "name":"html测试用例2",
+          "function":"getLoadHtml"
+        }
+      ]
+    }
+  ]
+}

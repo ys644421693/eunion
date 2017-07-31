@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.eunion.manage</groupId>
+        <artifactId>eunion-manage</artifactId>
+        <version>1.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>eunion-manage-web</artifactId>
+    <packaging>war</packaging>
+    <name>eunion-manage-web Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.eunion.manage</groupId>
+            <artifactId>eunion-manage-dto</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.eunion.manage</groupId>
+            <artifactId>eunion-manage-repository</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.eunion.manage</groupId>
+            <artifactId>eunion-manage-service</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.eunion.manage</groupId>
+            <artifactId>eunion-manage-service-impl</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.eunion.manage</groupId>
+            <artifactId>eunion-manage-controller</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.eunion.manage</groupId>
+            <artifactId>eunion-manage-entity</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.eunion.manage</groupId>
+            <artifactId>eunion-manage-security</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.eunion.manage</groupId>
+            <artifactId>eunion-manage-scheduling</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.eunion.manage</groupId>
+            <artifactId>eunion-manage-config</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>spring-eunion-web</finalName>
+    </build>
+</project>

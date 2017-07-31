@@ -1,0 +1,6 @@
+<ul>
+    <li ng-repeat="cell in data">
+        <a href="#" class="" ui-sref="controllerPanel.{{cell.name}}">角色管理</a>
+        <tree-list data="cell.data" ng-if="cell.data"></tree-list>
+    </li>
+</ul>

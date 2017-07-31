@@ -1,0 +1,4 @@
+使用angularjs 中的resource 提交spring mvc restful 数据
+post：需要 operaByFunctionName.add({NAME:"data",METHOD: "addNewNode"},data ,function (data) {}); post提交数据后台controller 参数中需添加 @RequestBody 注解
+delete删除数据 operaByFunctionName.delete(dataRow ,function (data) {}); 其中dataRow包含 NAME METHOD
+import.sql 为初始化数据  在web.xml中填的路径  false为不初始化

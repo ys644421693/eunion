@@ -1,0 +1,63 @@
+<div id="main">
+    <p><a href="javascript:void(0)" class="button" title="添加验证" id="dialog_link" data-toggle="modal" data-target="#myModal" ng-click="addCheck()"><span class="ui-icon ui-icon-plusthick"></span>添加验证</a></p>
+    <table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>名称</td>
+            <td>正则表达式</td>
+            <td>描述</td>
+            <td style="width: 20%">操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="{{$index%2==0?'':'odd'}}" ng-repeat="row in dataRole">
+            <td ng-bind="row.id"></td>
+            <td ng-bind="row.name"></td>
+            <td ng-bind="row.value"></td>
+            <td ng-bind="row.description"></td>
+            <td>
+                <input class="btn btn-warning btn-sm" type="button" value="修改" ng-click="updateCheck(row)" data-toggle="modal" data-target="#myModal">
+                <input class="btn btn-danger btn-sm" type="button" value="删除" ng-click="deleteCheck(row)">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="role">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="title">验证</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="defaultForm" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">名称：</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="name" ng-model="check.name" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">正则表达式：</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="name" ng-model="check.value" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">链接描述：</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="identify" ng-model="check.description" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" ng-click = "saveCheck()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

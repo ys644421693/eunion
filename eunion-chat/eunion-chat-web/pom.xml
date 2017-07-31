@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.eunion.manage</groupId>
+    <artifactId>eunion-chat</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>eunion-chat-web</artifactId>
+  <packaging>war</packaging>
+  <name>eunion-chat-web Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>com.eunion.manage</groupId>
+      <artifactId>eunion-chat-controller</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.eunion.manage</groupId>
+      <artifactId>eunion-chat-repository</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.eunion.manage</groupId>
+      <artifactId>eunion-chat-service</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.eunion.manage</groupId>
+      <artifactId>eunion-chat-service-impl</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.eunion.manage</groupId>
+      <artifactId>eunion-chat-entity</artifactId>
+      <version>1.0</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>eunion-chat-web</finalName>
+  </build>
+</project>
