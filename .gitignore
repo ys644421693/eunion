@@ -18,5 +18,6 @@ Thumbs.db
 *.iws
 *.tar.gz
 .idea
+.zip
 /test/*
 web/src/test/resources/
