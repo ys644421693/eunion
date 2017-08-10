@@ -29,6 +29,12 @@ public class ColumnsAndtablesController {
     @RequestMapping(value = "/getAllColumnsByTable",method = RequestMethod.GET)
     @ResponseBody
     public List<ColumnsAndTable> getAllColumnsByTable(String tableName){
-        return columnsAndTablesService.getAllolumnsByTable(tableName);
+        return columnsAndTablesService.getAllColumnsByTable(tableName);
+    }
+
+    @RequestMapping(value = "/getTableInfo",method = RequestMethod.GET)
+    @ResponseBody
+    public Object getTableInfo(){
+        return columnsAndTablesService.getTableInfo();
     }
 }

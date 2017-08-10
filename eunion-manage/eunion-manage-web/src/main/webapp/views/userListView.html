@@ -1,5 +1,62 @@
-<div class="container">
-    <div >
+<div class="container-fluid" id="systemComponent">
+    <div class="row">
+        <div id="jquery-accordion-menu" class="jquery-accordion-menu col-sm-2">
+            <div class="jquery-accordion-menu-header" id="form">
+                <span>System Setting</span>
+            </div>
+            <ul id="demo-list">
+                <li class="active"><a href="#/userList"><i class="fa fa-list-alt"></i>表格管理 </a></li>
+                <li><a href="#/userList"><i class="fa fa-window-restore"></i>弹出窗管理 </a></li>
+                <li><a href="#/userList"><i class="fa fa-file-code-o"></i>页面管理 </a><!--<span class="jquery-accordion-menu-label">
+				12 </span>--></li>
+                <li><a href="#/userList"><i class="fa fa-window-maximize"></i>分页管理 </a>
+<!--                    <ul class="submenu">
+                        <li><a href="#/userList">Web Design </a></li>
+                        <li><a href="#/userList">Hosting </a></li>
+                        <li><a href="#/userList">Design </a>
+                            <ul class="submenu">
+                                <li><a href="#/userList">Graphics </a></li>
+                                <li><a href="#/userList">Vectors </a></li>
+                                <li><a href="#/userList">Photoshop </a></li>
+                                <li><a href="#/userList">Fonts </a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#/userList">Consulting </a></li>
+                    </ul>-->
+                </li>
+                <li><a href="#/userList"><i class="fa fa-wpforms"></i>表单管理 </a></li>
+                <li><a href="#/userList"title="Calculator"><i class="fa fa-paperclip"></i>组件管理 </a></li>
 
+            </ul>
+            <div class="jquery-accordion-menu-footer">
+                Footer
+            </div>
+        </div>
     </div>
+
+    <script>
+        window.onresize = autoDivHeight;
+
+        function autoDivHeight() {
+            var height = $(document.body).height() - 250;
+            if (height > 100) {
+                $("#menu-e-union").css("height", height + "px");
+                $("#bgwrap").css("height", height + "px");
+                $("#jquery-accordion-menu").css("height", height + "px");
+            }
+        }
+
+        autoDivHeight();
+
+        function activeOnclick(){
+            $("#demo-list li a").click(function(event){
+                $("#demo-list").find("li").each(function( index,data){
+                    $(data).removeClass();
+                });
+                $(this).parent("li").addClass("active");
+            });
+        }
+        activeOnclick();
+    </script>
+
 </div>

@@ -10,12 +10,8 @@ define(['./module', 'jquery'], function (commonDirective) {
             li.setAttribute("class","header");
             root.append(li);
 
-            var i = document.createElement("i");
-            i.setAttribute("class","fa fa-dashboard");
-            li.append(i);
-
             var span = document.createElement("span");
-            $(span).text("MAIN NAVIGATION");
+            $(span).text("Control Panel");
             li.append(span);
 
             getTree(0, data,root);

@@ -47,7 +47,8 @@
     width: 280px;
     padding-top: 1px;
     position: relative;
+    background-color: #414956;
 }
 .fa{
-    color: #a7b1c2;
+    color: #fff;
 }

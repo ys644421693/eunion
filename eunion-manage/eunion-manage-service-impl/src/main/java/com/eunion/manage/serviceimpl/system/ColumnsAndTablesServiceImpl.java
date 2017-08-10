@@ -1,5 +1,6 @@
 package com.eunion.manage.serviceimpl.system;
 
+import com.eunion.manage.dto.response.TableInfoRespones;
 import com.eunion.manage.entity.table.ColumnsAndTable;
 import com.eunion.manage.entity.table.Table;
 import com.eunion.manage.service.system.ColumnsAndTablesService;
@@ -25,17 +26,18 @@ public class ColumnsAndTablesServiceImpl implements ColumnsAndTablesService {
     private String dbName;
 
     @Override
-    public List<ColumnsAndTable> getAllolumnsByTable(String tableName) {
-        String sql = "SELECT  * FROM information_schema.columns WHERE table_schema ='" + dbName + "' AND TABLE_NAME = " + tableName ;
-        Object columnsAndTables = jdbcTemplate.query(sql, new ResultSetExtractor() {
+    public List<ColumnsAndTable> getAllColumnsByTable(String tableName) {
+        String sql = "SELECT  * FROM information_schema.columns WHERE table_schema ='" + dbName + "' AND TABLE_NAME = ?" ;
+        String params[]=new String[]{tableName};
+        Object columnsAndTables = jdbcTemplate.query(sql, params, new ResultSetExtractor() {
             @Override
             public Object extractData(ResultSet rs) throws SQLException, DataAccessException {
                 List<ColumnsAndTable> list = new ArrayList<ColumnsAndTable>();
 
                 while (rs.next()) {
                     ColumnsAndTable columnsAndTable = new ColumnsAndTable();
-                    columnsAndTable.setCHARACTER_MAXIMUM_LENGTH(rs.getInt("CHARACTER_MAXIMUM_LENGTH"));
-                    columnsAndTable.setCHARACTER_OCTET_LENGTH(rs.getInt("CHARACTER_OCTET_LENGTH"));
+//                    columnsAndTable.setCHARACTER_MAXIMUM_LENGTH(rs.getInt("CHARACTER_MAXIMUM_LENGTH"));
+//                    columnsAndTable.setCHARACTER_OCTET_LENGTH(rs.getInt("CHARACTER_OCTET_LENGTH"));
                     columnsAndTable.setCHARACTER_SET_NAME(rs.getString("CHARACTER_SET_NAME"));
                     columnsAndTable.setCOLLATION_NAME(rs.getString("COLLATION_NAME"));
                     columnsAndTable.setCOLUMN_COMMENT(rs.getString("COLUMN_COMMENT"));
@@ -100,5 +102,23 @@ public class ColumnsAndTablesServiceImpl implements ColumnsAndTablesService {
             }
         });
         return (List<Table>) tables;
+    }
+
+    @Override
+    public List<TableInfoRespones> getTableInfo(){
+        List<Table> tables = getAllTable();
+        List<TableInfoRespones> tableList = new ArrayList<TableInfoRespones>();
+        tables.forEach(t->{
+            TableInfoRespones tableInfoRespones = new TableInfoRespones();
+            List<ColumnsAndTable> columnsAndTables =  getAllColumnsByTable(t.getTABLE_NAME());
+            List<String> columns = new ArrayList<String>();
+            tableInfoRespones.setTableName(t.getTABLE_NAME());
+            columnsAndTables.forEach(y -> {
+                columns.add(y.getCOLUMN_NAME());
+            });
+            tableInfoRespones.setColumns(columns);
+            tableList.add(tableInfoRespones);
+        });
+        return tableList;
     }
 }
