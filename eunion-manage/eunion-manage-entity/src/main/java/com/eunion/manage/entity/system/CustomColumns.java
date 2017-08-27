@@ -1,6 +1,7 @@
 package com.eunion.manage.entity.system;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Table(name = "t_custom_column")
 @Entity
@@ -9,10 +10,11 @@ public class CustomColumns {
     private int id;
     private String tableName;
     private String columnName;
-    private String index;
-    private boolean isShow;
+    private int indexs;
+    private boolean isShows;
     private String alias;//别名
-    private boolean isSort;
+    private boolean isSorts;
+    private Set<TransferredMeaning> transferredMeanings;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,12 +42,20 @@ public class CustomColumns {
         this.columnName = columnName;
     }
 
-    public String getIndex() {
-        return index;
+    public int getIndexs() {
+        return indexs;
     }
 
-    public void setIndex(String index) {
-        this.index = index;
+    public void setIndexs(int indexs) {
+        this.indexs = indexs;
+    }
+
+    public boolean isShows() {
+        return isShows;
+    }
+
+    public void setShows(boolean shows) {
+        isShows = shows;
     }
 
     public String getAlias() {
@@ -56,19 +66,21 @@ public class CustomColumns {
         this.alias = alias;
     }
 
-    public boolean isShow() {
-        return isShow;
+    public boolean isSorts() {
+        return isSorts;
     }
 
-    public void setShow(boolean show) {
-        isShow = show;
+    public void setSorts(boolean sorts) {
+        isSorts = sorts;
     }
 
-    public boolean isSort() {
-        return isSort;
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable( name="t_field_url", joinColumns=@JoinColumn(name="url_id"), inverseJoinColumns=@JoinColumn(name="field_id") )
+    public Set<TransferredMeaning> getTransferredMeanings() {
+        return transferredMeanings;
     }
 
-    public void setSort(boolean sort) {
-        isSort = sort;
+    public void setTransferredMeanings(Set<TransferredMeaning> transferredMeanings) {
+        this.transferredMeanings = transferredMeanings;
     }
 }

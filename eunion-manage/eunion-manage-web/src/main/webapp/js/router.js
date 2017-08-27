@@ -66,7 +66,8 @@ define(["app"], function(app){
 			url:'/userList',
 			views:{
 				'content':{
-					templateUrl:"/views/userListView.html"
+					templateUrl:"/views/userListView.html",
+                    controller:'checkRole'
 				}
 			}
 		});

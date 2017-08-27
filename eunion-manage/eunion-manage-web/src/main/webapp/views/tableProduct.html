@@ -1,0 +1,54 @@
+<div class="row-fluid">
+    <div class="row-fluid ">
+        <div class="alert alert-warning alert-dismissible fade in panel-margin information message" role="alert" data-dismiss="alert" aria-label="Close">
+            <h3 class="panel-margin-content">表单设置-请合理使用!</h3>
+            <p>用于设置以后自动生成表格，只要将数据源传入即可显示相关信息！</p>
+        </div>
+    </div>
+   <div class="row-fluid">
+       <div class="col-sm-offset-1 col-sm-10" >
+           <form class="form-horizontal panel-margin" role="form">
+               <fieldset>
+                   <legend>选择相关表</legend>
+                   <div class="form-group">
+                       <label for="disabledSelect"  class="col-sm-2 control-label">表名</label>
+                       <div class="col-sm-3">
+                           <select id="disabledSelect" class="form-control" ng-options="table.tableName for table in dataTable" ng-model="selected" ng-change="getTableConfig()">
+                               <option value="">---选择表格---</option>
+                           </select>
+                       </div>
+                       <div class="col-sm-2">
+                           <button type="button" class="btn btn-primary btn-sm" ng-click="setData()"><i class="fa fa-cog fa-fw"></i>设置</button>
+                       </div>
+                   </div>
+               </fieldset>
+           </form>
+       </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-sm-offset-1 col-sm-10" >
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">字段设置
+
+                </div>
+                <!-- Table -->
+                <table class="table">
+                    <tr>
+                        <th>序号</th>
+                        <th>字段名称</th>
+                        <th>别名</th>
+                        <th></th>
+                    </tr>
+                    <!--有问题-->
+                    <tr ng-repeat="columnInfo in selectedTwo">
+                        <th><span ng-bind="columnInfo.index = $index"></span></th>
+                        <td><span ng-bind="columnInfo.columnName"></span></td>
+                        <td><input type="text" ng-model="columnInfo.alias"></td>
+                        <td><button type="button" class="btn btn-danger btn-sm" ng-click="delete()"><i class="fa fa-trash-o fa-lg"></i>删除</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

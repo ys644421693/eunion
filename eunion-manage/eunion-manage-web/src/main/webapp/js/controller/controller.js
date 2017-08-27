@@ -666,4 +666,7 @@ define(['./module', 'jquery'], function (controllers, $) {
         }
     });
 
+    controllers.controller('systemSetting',function ($scope,$stateParams) {
+        
+    });
 });

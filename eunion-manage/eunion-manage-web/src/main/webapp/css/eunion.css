@@ -52,3 +52,10 @@
 .fa{
     color: #fff;
 }
+
+.panel-margin{
+    margin: 10px;
+}
+.panel-margin-content{
+    padding-left: 60px;
+}

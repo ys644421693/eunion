@@ -4,21 +4,21 @@ define(['./module', 'jquery'], function (commonDirective) {
 
         function getTreeRoot(data) {
             var root = document.createElement("ul");
-            root.setAttribute("class","sidebar-menu");
+            root.setAttribute("class", "sidebar-menu");
 
             var li = document.createElement("li");
-            li.setAttribute("class","header");
+            li.setAttribute("class", "header");
             root.append(li);
 
             var span = document.createElement("span");
             $(span).text("Control Panel");
             li.append(span);
 
-            getTree(0, data,root);
+            getTree(0, data, root);
             return root;
         }
 
-        function getTree(parentID, data,root) {
+        function getTree(parentID, data, root) {
 
             for (var i = 0; i < data.length; i++) {
                 if (data[i].parentId == parentID) {
@@ -28,36 +28,36 @@ define(['./module', 'jquery'], function (commonDirective) {
                     var a = document.createElement("a");
                     a.setAttribute("href", "#");
                     a.setAttribute("id", "I" + data[i].id);
-                    if (data[i].identify != null){
+                    if (data[i].identify != null) {
                         a.setAttribute("ui-sref", "controllerPanel." + data[i].identify);
                     }
                     li.append(a);
 
                     var icon = document.createElement("i");
-                    if(typeof(data[i].icon) != "undefined"){
-                        icon.setAttribute("class","fa " + data[i].icon);
+                    if (typeof(data[i].icon) != "undefined") {
+                        icon.setAttribute("class", "fa " + data[i].icon);
                     }
-                    icon.setAttribute("class","fa fa-circle-o");
+                    icon.setAttribute("class", "fa fa-circle-o");
                     a.append(icon);
 
                     var span = document.createElement("span");
                     $(span).text(data[i].treeName);
                     a.append(span);
 
-                    if (parentID == 0){
+                    if (parentID == 0) {
                         var iconTwo = document.createElement("i");
-                        iconTwo.setAttribute("class","fa fa-angle-left pull-right");
+                        iconTwo.setAttribute("class", "fa fa-angle-left pull-right");
                         a.append(iconTwo);
-                        li.setAttribute("class","treeview");
+                        li.setAttribute("class", "treeview");
                     }
 
                     root.append(li);
 
-                    var ul  = document.createElement("ul");
-                    ul.setAttribute("class","treeview-menu");
+                    var ul = document.createElement("ul");
+                    ul.setAttribute("class", "treeview-menu");
                     li.append(ul);
 
-                    getTree(data[i].id,data,ul);
+                    getTree(data[i].id, data, ul);
                 }
             }
 
@@ -85,9 +85,9 @@ define(['./module', 'jquery'], function (commonDirective) {
                         identify: $scope.node.identify
                     };
                     operaByFunctionName.add({NAME: "data", METHOD: "addNewNode"}, tempData, function (data) {
-                        if(data.msg){
+                        if (data.msg) {
                             alert(data.msg);
-                            return ;
+                            return;
                         }
                         $scope.data.push(data.treeSystem);
                         $("#node").modal('hide');
@@ -161,6 +161,52 @@ define(['./module', 'jquery'], function (commonDirective) {
                         $scope.fileread = changeEvent.target.files[0];
                     });
                 });
+            }
+        }
+    }]);
+
+    commonDirective.directive("formSetting", ['operaByFunctionName', '$compile', 'operaByFunctionNameService', function (operaByFunctionName, $compile, operaByFunctionNameService) {
+        return {
+            restrict: "E",
+            replace: true,
+            scope: false,
+            templateUrl: "/views/tableProduct.html",
+            link: function ($scope, $element, $attr) {
+                $scope.dataTable = [];
+                $scope.dataInfo = [];
+                $scope.selectedTwo = [];
+
+                operaByFunctionName.get({NAME: "table", METHOD: "getTableInfo"}, function (data) {
+                    $scope.dataTable = data;
+                    console.log(data);
+                });
+
+                $scope.getTableConfig = function () {
+                    var dt = {"tableName": $scope.selected.tableName}
+                    operaByFunctionNameService.get({NAME: "table", METHOD: "getDataByTableName"}, dt, function (data) {
+                        if (data.length <= 0) {
+                            if($scope.selectedTwo.length > 0)
+                                $scope.selectedTwo.length = 0 ;
+                            for(var temp in $scope.selected.columns){
+                                var tp ={
+                                    "columnName":$scope.selected.columns[temp],
+                                    "alias":""
+                                };
+                                $scope.selectedTwo.push(tp);
+                            }
+                        }else{
+                            $scope.selectedTwo.length = 0;
+                            for (var columnsObj in data){
+                                $scope.selectedTwo.push(columnsObj.columnName);
+                            }
+                        }
+                    });
+                };
+
+                $scope.saveTableConfig = function () {
+
+                }
+
             }
         }
     }]);
