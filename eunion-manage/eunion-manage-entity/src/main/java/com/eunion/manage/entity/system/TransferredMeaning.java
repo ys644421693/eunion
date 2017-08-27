@@ -1,9 +1,9 @@
 package com.eunion.manage.entity.system;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "t_transfer_meaning")
 public class TransferredMeaning {
 
     private int id;

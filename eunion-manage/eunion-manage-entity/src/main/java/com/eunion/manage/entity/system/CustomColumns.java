@@ -75,7 +75,7 @@ public class CustomColumns {
     }
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinTable( name="t_field_url", joinColumns=@JoinColumn(name="url_id"), inverseJoinColumns=@JoinColumn(name="field_id") )
+    @JoinTable( name="t_column_transfer", joinColumns=@JoinColumn(name="column_id"), inverseJoinColumns=@JoinColumn(name="transfer_id") )
     public Set<TransferredMeaning> getTransferredMeanings() {
         return transferredMeanings;
     }

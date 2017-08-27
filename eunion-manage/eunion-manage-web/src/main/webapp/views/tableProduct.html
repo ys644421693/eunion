@@ -45,7 +45,8 @@
                         <th><span ng-bind="columnInfo.index = $index"></span></th>
                         <td><span ng-bind="columnInfo.columnName"></span></td>
                         <td><input type="text" ng-model="columnInfo.alias"></td>
-                        <td><button type="button" class="btn btn-danger btn-sm" ng-click="delete()"><i class="fa fa-trash-o fa-lg"></i>删除</button></td>
+                        <td><button type="button" class="btn btn-danger btn-sm" ng-click="delete()"><i class="fa fa-trash-o fa-lg"></i> 删除</button>
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="delete()"><i class="fa fa-arrows-h fa-lg"></i> 转义</button></td>
                     </tr>
                 </table>
             </div>
