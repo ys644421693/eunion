@@ -59,3 +59,27 @@
 .panel-margin-content{
     padding-left: 60px;
 }
+
+.dropdown-menu>li>span {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    cursor:hand;
+}
+.dropdown-menu>li>span:hover{
+    background-color: #0e90d2;
+}
+
+.panel-heading-btn-group {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.panel-heading-btn-group > .form-group{
+    padding-left: 60px;
+ }

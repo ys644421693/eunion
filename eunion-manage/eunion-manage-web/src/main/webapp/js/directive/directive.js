@@ -175,6 +175,9 @@ define(['./module', 'jquery'], function (commonDirective) {
                 $scope.dataTable = [];
                 $scope.dataInfo = [];
                 $scope.selectedTwo = [];
+                $scope.viewSelect = 0;
+                $scope.tableClass = "table";
+                $scope.serviceObj = {};
 
                 operaByFunctionName.get({NAME: "table", METHOD: "getTableInfo"}, function (data) {
                     $scope.dataTable = data;
@@ -205,8 +208,29 @@ define(['./module', 'jquery'], function (commonDirective) {
 
                 $scope.saveTableConfig = function () {
 
-                }
+                };
 
+                $scope.viewTable = function(){
+                    if(!$scope.serviceObj.serviceSpace && !$scope.serviceObj.serviceSpace){
+                        alert("请填写服务空间及服务！");
+                        return;
+                    }
+                    $scope.viewSelect = 1;
+                    $scope.selectedTwo.sort(function(a,b){return a.index-b.index});
+                    operaByFunctionName.get({NAME: $scope.serviceObj.serviceSpace, METHOD: $scope.serviceObj.serviceName}, function (data) {
+                        $scope.dataViewTable = data;
+                        console.log(data);
+                    });
+                };
+
+                $scope.setData = function(){
+                    $scope.viewSelect = 0;
+                };
+
+                $scope.dataBind = function (rowData,index) {
+                    console.log("");
+                    return "test";
+                }
             }
         }
     }]);

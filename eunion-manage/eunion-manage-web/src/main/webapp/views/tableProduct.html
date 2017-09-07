@@ -19,19 +19,31 @@
                        </div>
                        <div class="col-sm-2">
                            <button type="button" class="btn btn-primary btn-sm" ng-click="setData()"><i class="fa fa-cog fa-fw"></i>设置</button>
+                           <button type="button" class="btn btn-primary btn-sm" ng-click="viewTable()"><i class="fa fa-gears fa-fw"></i>预览</button>
                        </div>
                    </div>
                </fieldset>
            </form>
        </div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" ng-if="viewSelect == 0">
         <div class="col-sm-offset-1 col-sm-10" >
             <div class="panel panel-default">
                 <!-- Default panel contents -->
-                <div class="panel-heading">字段设置
-
+                <div class="panel-heading">
+                    字段设置
                 </div>
+                <form class="form-inline panel-heading-btn-group ">
+                    <div class="form-group">
+                        <label >服务所属空间:</label>
+                        <input type="text" class="form-control input-sm" placeholder="Service name space" ng-model="serviceObj.serviceSpace" >
+                    </div>
+                    <div class="form-group">
+                        <label >服务名称:</label>
+                        <input type="text" class="form-control input-sm" placeholder="service name" ng-model="serviceObj.serviceName" >
+                    </div>
+                </form>
+
                 <!-- Table -->
                 <table class="table">
                     <tr>
@@ -47,6 +59,35 @@
                         <td><input type="text" ng-model="columnInfo.alias"></td>
                         <td><button type="button" class="btn btn-danger btn-sm" ng-click="delete()"><i class="fa fa-trash-o fa-lg"></i> 删除</button>
                             <button type="button" class="btn btn-primary btn-sm" ng-click="delete()"><i class="fa fa-arrows-h fa-lg"></i> 转义</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid" ng-if="viewSelect == 1">
+        <div class="col-sm-offset-1 col-sm-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="tableStyle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span style="color: #FFFFFF">表格样式</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="tableStyle">
+                            <li ng-click="tableClass = 'table';"><span>默认</span></li>
+                            <li ng-click="tableClass = 'table table-striped';"><span>条纹状表格</span></li>
+                            <li ng-click="tableClass = 'table table-bordered';"><span>带边框的表格</span></li>
+                            <li ng-click="tableClass = 'table table-hover';"><span>鼠标悬停</span></li>
+                            <li ng-click="tableClass = 'table table-condensed';"><span>紧缩表格</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <table id="productTable" ng-class="tableClass">
+                    <tr>
+                        <th ng-repeat="column in selectedTwo" ng-bind="column.alias?column.alias:column.columnName"></th>
+                    </tr>
+                    <tr ng-repeat="rowData in dataViewTable">
+                        <td ng-repeat="column in selectedTwo" ng-bind="rowData[column.columnName]"></td>
                     </tr>
                 </table>
             </div>
