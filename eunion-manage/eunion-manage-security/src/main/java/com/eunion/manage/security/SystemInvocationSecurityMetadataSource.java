@@ -26,6 +26,7 @@ public class SystemInvocationSecurityMetadataSource implements FilterInvocationS
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private static Map<String, Collection<ConfigAttribute>> resourceMap = null;
+    private static Map<String,String> interfaceUrl = new HashMap<>();
 
     @Resource
     private SystemUrlRepository systemUrlRepository;
@@ -38,16 +39,30 @@ public class SystemInvocationSecurityMetadataSource implements FilterInvocationS
         if (firstQuestionMarkIndex != -1) {
             url = url.substring(0, firstQuestionMarkIndex);
         }
-        Iterator<String> ite = resourceMap.keySet().iterator();
+        /*Iterator<String> ite = resourceMap.keySet().iterator();
         while (ite.hasNext()) {
             String resURL = ite.next();
             if (url.equals(resURL)) {
                 return resourceMap.get(resURL);
             }
+        }*/
+        if (resourceMap.get(url) != null){
+            Collection<ConfigAttribute> configAttributes = resourceMap.get(url);
+            return configAttributes;
         }
 
-//        throw new IllegalArgumentException("url权限位登记无法访问！");
-        return null;
+        //对外的接口开放所有权限
+        if ("INTERFACE_ROLE".equals(interfaceUrl.get(url))){
+            return null;
+        }
+
+        //默认为admin权限
+        Collection<ConfigAttribute> att = new ArrayList<ConfigAttribute>();
+        ConfigAttribute ca = new SecurityConfig("admin");
+        att.add(ca);
+        resourceMap.put(url,att);
+
+        return att;
     }
 
     public Collection<ConfigAttribute> getAllConfigAttributes() {
@@ -66,6 +81,7 @@ public class SystemInvocationSecurityMetadataSource implements FilterInvocationS
             Collection<ConfigAttribute> att = new ArrayList<ConfigAttribute>();
             for(Role role : systemUrl.getRoles()){
                 if (role.getRoleName().equals("INTERFACE_ROLE")){
+                    interfaceUrl.put(systemUrl.getUrl(),"INTERFACE_ROLE");
                     continue;
                 }
                 ConfigAttribute ca = new SecurityConfig(role.getRoleName());
