@@ -46,7 +46,9 @@ public class SystemAuthority {
             return "redirect:/login.html?error=true";
         }
         if (logout != null && logout.contains("true")) {
-            logger.debug("-------------登录失败--------------");
+            logger.debug("-------------退出登录--------------");
+            HttpSession session = request.getSession();
+            session.removeAttribute("SPRING_SECURITY_CONTEXT");
             return "redirect:/login.html?logout=true";
         }
         try {
