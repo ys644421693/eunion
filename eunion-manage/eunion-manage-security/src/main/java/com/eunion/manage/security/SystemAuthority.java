@@ -43,11 +43,11 @@ public class SystemAuthority {
                         String userName, String password, HttpServletRequest request) {
         if (error != null && error.contains("true")) {
             logger.debug("-------------登录失败--------------");
-            return "redirect:/login.html";
+            return "redirect:/login.html?error=true";
         }
         if (logout != null && logout.contains("true")) {
             logger.debug("-------------登录失败--------------");
-            return "redirect:/login.html";
+            return "redirect:/login.html?logout=true";
         }
         try {
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userName, password);
