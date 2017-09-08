@@ -53,8 +53,8 @@ public class SystemAuthority {
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userName, password);
             Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            /*HttpSession session = request.getSession();
-            session.setAttribute("", SecurityContextHolder.getContext());*/
+            HttpSession session = request.getSession();
+            session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
             return "redirect:/system/admin";
         } catch (Exception ex) {
             return "/system/login?error=true";
