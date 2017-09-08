@@ -13,6 +13,7 @@
     <http pattern="/images/**" security="none"/>
     <http pattern="/assets/**" security="none"/>
     <http pattern="/lib/**" security="none"/>
+    <http pattern="/system/login" security="none"></http>
     <http auto-config="true">
         <form-login login-page="/login.html" authentication-failure-url="/login?error=true" default-target-url="/login"
         username-parameter="userName" password-parameter="password" />
