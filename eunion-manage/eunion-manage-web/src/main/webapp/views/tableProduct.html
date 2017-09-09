@@ -17,7 +17,7 @@
                                <option value="">---选择表格---</option>
                            </select>
                        </div>
-                       <div class="col-sm-2">
+                       <div class="col-sm-6">
                            <button type="button" class="btn btn-primary btn-sm" ng-click="setData()"><i class="fa fa-cog fa-fw"></i>设置</button>
                            <button type="button" class="btn btn-primary btn-sm" ng-click="viewTable()"><i class="fa fa-gears fa-fw"></i>预览</button>
                        </div>
@@ -42,6 +42,21 @@
                         <label >服务名称:</label>
                         <input type="text" class="form-control input-sm" placeholder="service name" ng-model="serviceObj.serviceName" >
                     </div>
+                    <div class="form-group">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="pageStyle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <span style="color: #FFFFFF"><i class="fa fa-file-code-o fa-fw"></i>分页控件</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="pageStyle">
+                                <li><span>无</span></li>
+                                <li><span>条纹状表格</span></li>
+                                <li><span>带边框的表格</span></li>
+                                <li><span>鼠标悬停</span></li>
+                                <li><span>紧缩表格</span></li>
+                            </ul>
+                        </div>
+                    </div>
                 </form>
 
                 <!-- Table -->
@@ -57,8 +72,12 @@
                         <th><span ng-bind="columnInfo.index = $index"></span></th>
                         <td><span ng-bind="columnInfo.columnName"></span></td>
                         <td><input type="text" ng-model="columnInfo.alias"></td>
-                        <td><button type="button" class="btn btn-danger btn-sm" ng-click="delete()"><i class="fa fa-trash-o fa-lg"></i> 删除</button>
-                            <button type="button" class="btn btn-primary btn-sm" ng-click="delete()"><i class="fa fa-arrows-h fa-lg"></i> 转义</button></td>
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm" ng-click="deleteColumn(columnInfo)"><i class="fa fa-trash-o fa-lg"></i> 删除</button>
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="delete()"><i class="fa fa-arrows-h fa-lg"></i> 转义</button>
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="moveData(columnInfo,1)"><i class="fa fa-arrow-down fa-lg"></i> 下移</button>
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="moveData(columnInfo,2)"><i class="fa fa-arrow-up fa-lg"></i> 上移</button>
+                        </td>
                     </tr>
                 </table>
             </div>

@@ -227,9 +227,32 @@ define(['./module', 'jquery'], function (commonDirective) {
                     $scope.viewSelect = 0;
                 };
 
-                $scope.dataBind = function (rowData,index) {
-                    console.log("");
-                    return "test";
+                $scope.deleteColumn = function(rowData){
+                    for (var temp = 0;temp < $scope.selectedTwo.length ; temp++){
+                        if($scope.selectedTwo[temp].index == rowData.index){
+                            $scope.selectedTwo.splice(temp,1);
+                            return ;
+                        }
+                    }
+                };
+                $scope.moveData = function (rowData,direction) {
+                    //向下移动一个
+                    if(direction == 1){
+                        var temp = $scope.selectedTwo[rowData.index + 1];
+                        if (temp){
+                            $scope.selectedTwo[rowData.index + 1] = rowData;
+                            $scope.selectedTwo[rowData.index] = temp;
+                        }
+                    }
+
+                    if(direction == 2){
+                        var temp = $scope.selectedTwo[rowData.index - 1];
+                        if (temp){
+                            $scope.selectedTwo[rowData.index - 1] = rowData;
+                            $scope.selectedTwo[rowData.index] = temp;
+                        }
+
+                    }
                 }
             }
         }
