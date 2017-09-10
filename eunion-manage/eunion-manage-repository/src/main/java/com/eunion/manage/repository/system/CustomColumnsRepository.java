@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CustomColumnsRepository extends CrudRepository<CustomColumns, Long> {
 
-    List<CustomColumns> findCustomColumnsByTableName(String tableName);
+
 }

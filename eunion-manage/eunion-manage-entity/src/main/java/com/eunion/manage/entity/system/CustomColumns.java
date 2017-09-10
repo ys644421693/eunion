@@ -1,20 +1,23 @@
 package com.eunion.manage.entity.system;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Table(name = "t_custom_column")
 @Entity
+@JsonIgnoreProperties(value = {"tableServiceInfo"})
 public class CustomColumns {
 
     private int id;
-    private String tableName;
     private String columnName;
     private int indexs;
     private boolean isShows;
     private String alias;//别名
     private boolean isSorts;
     private Set<TransferredMeaning> transferredMeanings;
+    private TableServiceInfo tableServiceInfo;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,14 +27,6 @@ public class CustomColumns {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
     }
 
     public String getColumnName() {
@@ -74,13 +69,21 @@ public class CustomColumns {
         isSorts = sorts;
     }
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinTable( name="t_column_transfer", joinColumns=@JoinColumn(name="column_id"), inverseJoinColumns=@JoinColumn(name="transfer_id") )
+    @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER, targetEntity = TransferredMeaning.class, mappedBy = "customColumns")
     public Set<TransferredMeaning> getTransferredMeanings() {
         return transferredMeanings;
     }
 
     public void setTransferredMeanings(Set<TransferredMeaning> transferredMeanings) {
         this.transferredMeanings = transferredMeanings;
+    }
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+    @JoinColumn(name = "tableServiceInfoId")
+    public TableServiceInfo getTableServiceInfo() {
+        return tableServiceInfo;
+    }
+
+    public void setTableServiceInfo(TableServiceInfo tableServiceInfo) {
+        this.tableServiceInfo = tableServiceInfo;
     }
 }

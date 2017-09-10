@@ -15,11 +15,6 @@ public class CustomColumnsServiceImpl implements CustomColumnsService {
     private CustomColumnsRepository customColumnsRepository;
 
     @Override
-    public List<CustomColumns> getByTableName(String tableName) {
-        return customColumnsRepository.findCustomColumnsByTableName(tableName);
-    }
-
-    @Override
     public Object save(List<CustomColumns> customColumns) {
         return customColumnsRepository.save(customColumns);
     }

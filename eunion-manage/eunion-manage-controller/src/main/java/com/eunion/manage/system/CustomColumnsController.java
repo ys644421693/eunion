@@ -21,16 +21,6 @@ public class CustomColumnsController {
     @Autowired
     private CustomColumnsService customColumnsService;
 
-    @RequestMapping(value = "/getDataByTableName",method = RequestMethod.GET)
-    @ResponseBody
-    public List<CustomColumns> getDataByTableName(@RequestParam(name = "tableName",required = true) String tableName){
-        logger.info("获取数据，请求数据为:" + tableName);
-        if (StringUtils.isEmpty(tableName)){
-            return null;
-        }
-        return customColumnsService.getByTableName(tableName);
-    }
-
     @RequestMapping(value = "/saveDataTableInfo",method = RequestMethod.POST)
     @ResponseBody
     public Object saveDataTableInfo(List<CustomColumns> customColumns){

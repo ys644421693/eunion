@@ -6,7 +6,5 @@ import java.util.List;
 
 public interface CustomColumnsService {
 
-    List<CustomColumns> getByTableName(String tableName);
-
     Object save(List<CustomColumns> customColumns);
 }
