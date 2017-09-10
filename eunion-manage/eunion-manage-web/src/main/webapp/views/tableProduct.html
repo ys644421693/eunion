@@ -13,7 +13,7 @@
                    <div class="form-group">
                        <label for="disabledSelect"  class="col-sm-2 control-label">表名</label>
                        <div class="col-sm-3">
-                           <select id="disabledSelect" class="form-control" ng-options="table.tableName for table in dataTable" ng-model="selected" ng-change="getTableConfig()">
+                           <select id="disabledSelect" class="dropdown" ng-options="table.tableName for table in dataTable" ng-model="selected" ng-change="getTableConfig()">
                                <option value="">---选择表格---</option>
                            </select>
                        </div>
@@ -36,11 +36,11 @@
                 <form class="form-inline panel-heading-btn-group ">
                     <div class="form-group">
                         <label >服务所属空间:</label>
-                        <input type="text" class="form-control input-sm" placeholder="Service name space" ng-model="serviceObj.serviceSpace" >
+                        <input type="text" class="mf" placeholder="Service name space" ng-model="serviceObj.serviceSpace" >
                     </div>
                     <div class="form-group">
                         <label >服务名称:</label>
-                        <input type="text" class="form-control input-sm" placeholder="service name" ng-model="serviceObj.serviceName" >
+                        <input type="text" class="mf" placeholder="service name" ng-model="serviceObj.serviceName" >
                     </div>
                     <div class="form-group">
                         <div class="dropdown">
@@ -74,14 +74,45 @@
                         <td><input type="text" ng-model="columnInfo.alias"></td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm" ng-click="deleteColumn(columnInfo)"><i class="fa fa-trash-o fa-lg"></i> 删除</button>
-                            <button type="button" class="btn btn-primary btn-sm" ng-click="delete()"><i class="fa fa-arrows-h fa-lg"></i> 转义</button>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" ng-click="transfer(columnInfo)"><i class="fa fa-arrows-h fa-lg"></i> 转义</button>
                             <button type="button" class="btn btn-primary btn-sm" ng-click="moveData(columnInfo,1)"><i class="fa fa-arrow-down fa-lg"></i> 下移</button>
                             <button type="button" class="btn btn-primary btn-sm" ng-click="moveData(columnInfo,2)"><i class="fa fa-arrow-up fa-lg"></i> 上移</button>
                         </td>
                     </tr>
                 </table>
             </div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">添加字段转义</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <!-- Fieldset -->
+                                <fieldset>
+                                    <p ng-repeat="mapProperties in mapProperties">
+                                        <label>key: </label>
+                                        <input class="sf" name="keyTransfer" type="text" value="medium input field" ng-model="mapProperties.value">
+                                        <label>value: </label>
+                                        <input class="sf" name="keyTransfer" type="text" value="medium input field" ng-model="mapProperties.valueOriginal">
+                                    </p>
+                                </fieldset>
+                                <!-- End of fieldset -->
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <input class="button" type="button" value="取消" data-dismiss="modal">
+                            <input class="button" type="button" value="添加映射" ng-click="addMapData()">
+                            <input class="button" type="button" ng-click="saveTableTransfer()" data-dismiss="modal" value="确定">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
     </div>
     <div class="row-fluid" ng-if="viewSelect == 1">
         <div class="col-sm-offset-1 col-sm-10">
@@ -98,6 +129,7 @@
                             <li ng-click="tableClass = 'table table-bordered';"><span>带边框的表格</span></li>
                             <li ng-click="tableClass = 'table table-hover';"><span>鼠标悬停</span></li>
                             <li ng-click="tableClass = 'table table-condensed';"><span>紧缩表格</span></li>
+                            <li ng-click="tableClass = 'fullwidth';"><span>黑白表格</span></li>
                         </ul>
                     </div>
                 </div>

@@ -178,10 +178,10 @@ define(['./module', 'jquery'], function (commonDirective) {
                 $scope.viewSelect = 0;
                 $scope.tableClass = "table";
                 $scope.serviceObj = {};
+                $scope.mapProperties = [];
 
                 operaByFunctionName.get({NAME: "table", METHOD: "getTableInfo"}, function (data) {
                     $scope.dataTable = data;
-                    console.log(data);
                 });
 
                 $scope.getTableConfig = function () {
@@ -253,6 +253,22 @@ define(['./module', 'jquery'], function (commonDirective) {
                         }
 
                     }
+                }
+
+                $scope.addMapData = function(){
+                    var temp = {"value":"","valueOriginal":""};
+                    $scope.mapProperties.push(temp);
+                };
+                var tempRowData = null;
+                $scope.transfer = function (rowData) {
+                    tempRowData = rowData;
+                    $scope.mapProperties.length = 0;
+                    var temp = {"value": "", "valueOriginal": ""};
+                    $scope.mapProperties.push(temp);
+                };
+                $scope.saveTableTransfer = function () {
+                    tempRowData.transferredMeanings = $scope.mapProperties;
+                    console.log(tempRowData);
                 }
             }
         }
