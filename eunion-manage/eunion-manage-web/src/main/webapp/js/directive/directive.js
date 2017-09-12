@@ -185,8 +185,17 @@ define(['./module', 'jquery'], function (commonDirective) {
                 });
 
                 $scope.getTableConfig = function () {
-                    var dt = {"tableName": $scope.selected.tableName}
-                    operaByFunctionNameService.get({NAME: "table", METHOD: "getDataByTableName"}, dt, function (data) {
+                    //var dt = {"tableName": $scope.selected.tableName};
+                    if($scope.selectedTwo.length > 0)
+                        $scope.selectedTwo.length = 0 ;
+                    for(var temp in $scope.selected.columns){
+                        var tp ={
+                            "columnName":$scope.selected.columns[temp],
+                            "alias":""
+                        };
+                        $scope.selectedTwo.push(tp);
+                    }
+                   /* operaByFunctionNameService.get({NAME: "table", METHOD: "getDataByTableName"}, dt, function (data) {
                         if (data.length <= 0) {
                             if($scope.selectedTwo.length > 0)
                                 $scope.selectedTwo.length = 0 ;
@@ -203,7 +212,7 @@ define(['./module', 'jquery'], function (commonDirective) {
                                 $scope.selectedTwo.push(columnsObj.columnName);
                             }
                         }
-                    });
+                    });*/
                 };
 
                 $scope.saveTableConfig = function () {
