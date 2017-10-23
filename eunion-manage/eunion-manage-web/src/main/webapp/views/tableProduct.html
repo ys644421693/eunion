@@ -57,6 +57,8 @@
                             </ul>
                         </div>
                     </div>
+                    <button class="btn btn-primary" ng-click="addColumns(1)" >添加事件</button>
+                    <button class="btn btn-primary" ng-click="addColumns(2)" >添加列</button>
                 </form>
 
                 <!-- Table -->
@@ -70,7 +72,9 @@
                     <!--有问题-->
                     <tr ng-repeat="columnInfo in selectedTwo">
                         <th><span ng-bind="columnInfo.index = $index"></span></th>
-                        <td><span ng-bind="columnInfo.columnName"></span></td>
+                        <!--普通列-->
+                        <td ng-if="columnInfo.type==null"><span ng-bind="columnInfo.columnName"></span></td>
+                        <td ng-if="columnInfo.type==2 || columnInfo.type==1"><input type="text" ng-model="columnInfo.columnName"></td>
                         <td><input type="text" ng-model="columnInfo.alias"></td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm" ng-click="deleteColumn(columnInfo)"><i class="fa fa-trash-o fa-lg"></i> 删除</button>

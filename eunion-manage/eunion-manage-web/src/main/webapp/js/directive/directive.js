@@ -278,7 +278,14 @@ define(['./module', 'jquery'], function (commonDirective) {
                 $scope.saveTableTransfer = function () {
                     tempRowData.transferredMeanings = $scope.mapProperties;
                     console.log(tempRowData);
-                }
+                };
+                $scope.addColumns= function (type) {
+                    var tmp = {
+                        'type':type,
+                        'columnName':''
+                    };
+                    $scope.selectedTwo.push(tmp);
+                };
             }
         }
     }]);
