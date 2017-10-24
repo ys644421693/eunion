@@ -1,1 +1,1 @@
-define(['./directive'],function(){});
+define(['./directive','./eventDirective'],function(){});
