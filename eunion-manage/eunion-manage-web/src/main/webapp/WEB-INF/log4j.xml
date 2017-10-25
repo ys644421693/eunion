@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM ".\log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+    <!-- 业务日志，生产环境使用 -->
+    <appender name="log_file" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/log/e-union/e-union-manage.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%t] %-5p %-40.40c,%L -%m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="log_file_error" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Threshold" value="ERROR"/>
+        <param name="File" value="/log/e-union/e-union-manage-error.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%t] %-5p %-40.40c,%L -%m%n"/>
+        </layout>
+    </appender>
+
+    <!-- 异步文件日志(详细) -->
+    <appender name="async_log_file" class="org.apache.log4j.AsyncAppender">
+        <param name="BufferSize" value="1024"/>
+        <param name="LocationInfo" value="true"/>
+        <appender-ref ref="log_file"/>
+    </appender>
+    <!-- 异步文件日志(异常) -->
+    <appender name="async_log_file_error" class="org.apache.log4j.AsyncAppender">
+        <param name="BufferSize" value="256"/>
+        <param name="LocationInfo" value="true"/>
+        <appender-ref ref="log_file_error"/>
+    </appender>
+
+    <!-- 控制台日志，开发阶段使用 -->
+    <appender name="CONSOLE-APPENDER" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%t] %-5p %-40.40c,%L -%m%n"/>
+        </layout>
+    </appender>
+
+    <!--什么都不打印,占位-->
+    <appender name="NULL-APPENDER" class="org.apache.log4j.varia.NullAppender">
+    </appender>
+
+    <!--特殊包目录日志控制-->
+    <logger name="com.alibaba.dubbo" additivity="false">
+        <level value="error" />
+        <appender-ref ref="async_log_file_error" />
+    </logger>
+
+    <logger name="org.apache.zookeeper" additivity="false">
+        <level value="error" />
+        <appender-ref ref="async_log_file_error" />
+    </logger>
+
+    <!-- 日志打印控制 -->
+    <root>
+        <level value="${log.level}"/>
+        <appender-ref ref="${default.appender}"/>
+        <appender-ref ref="async_log_file"/>
+        <appender-ref ref="async_log_file_error"/>
+    </root>
+
+</log4j:configuration>

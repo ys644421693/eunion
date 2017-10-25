@@ -1,7 +1,7 @@
 define(['./module', 'jquery'], function (commonDirective) {
     'use strict';
 
-    commonDirective.directive('eventManage', ['$compile', '$templateCache', function ($compile, $templateCache) {
+    commonDirective.directive('tableManage', ['$compile', '$templateCache', function ($compile, $templateCache) {
         function getTemplate($scope) {
             var template = "/page/component/baseButton.html";
             console.log($scope);

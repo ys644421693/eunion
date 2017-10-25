@@ -70,6 +70,66 @@
     </dependencies>
 
     <build>
-        <finalName>spring-eunion-web</finalName>
+        <finalName>eunion-manage-web</finalName>
+       <!-- <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <filters>
+            <filter>
+                com/eunion/manage/properties/jdbc.properties
+                &lt;!&ndash;src/main/java/com/config-${env}.properties&ndash;&gt;
+            </filter>
+        </filters>-->
     </build>
+    <!--<profiles>
+        <profile>
+            <id>development</id>
+            <properties>
+                <env>development</env>
+                <log.level>INFO</log.level>
+                <default.appender>CONSOLE-APPENDER</default.appender>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <env>test</env>
+                <log.level>INFO</log.level>
+                <default.appender>CONSOLE-APPENDER</default.appender>
+            </properties>
+        </profile>
+        <profile>
+            <id>build</id>
+            <properties>
+                <env>build</env>
+                <log.level>INFO</log.level>
+                <default.appender>NULL-APPENDER</default.appender>
+            </properties>
+        </profile>
+        <profile>
+            <id>production</id>
+            <properties>
+                <env>production</env>
+                <log.level>INFO</log.level>
+                <default.appender>NULL-APPENDER</default.appender>
+            </properties>
+        </profile>
+    </profiles>-->
 </project>

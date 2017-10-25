@@ -191,7 +191,8 @@ define(['./module', 'jquery'], function (commonDirective) {
                     for(var temp in $scope.selected.columns){
                         var tp ={
                             "columnName":$scope.selected.columns[temp],
-                            "alias":""
+                            "alias":"",
+                            "type":0
                         };
                         $scope.selectedTwo.push(tp);
                     }

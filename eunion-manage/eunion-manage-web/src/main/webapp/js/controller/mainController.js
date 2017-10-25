@@ -1,1 +1,1 @@
-define(['./controller'],function(){});
+define(['./controller','./controllerEvent'],function(){});

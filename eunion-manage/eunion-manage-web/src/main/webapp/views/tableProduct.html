@@ -20,7 +20,6 @@
                        <div class="col-sm-6">
                            <button type="button" class="btn btn-primary btn-sm" ng-click="setData()"><i class="fa fa-cog fa-fw"></i>设置</button>
                            <button type="button" class="btn btn-primary btn-sm" ng-click="viewTable()"><i class="fa fa-gears fa-fw"></i>预览</button>
-                           <event-manage></event-manage>
                        </div>
                    </div>
                </fieldset>
@@ -143,7 +142,14 @@
                         <th ng-repeat="column in selectedTwo" ng-bind="column.alias?column.alias:column.columnName"></th>
                     </tr>
                     <tr ng-repeat="rowData in dataViewTable">
-                        <td ng-repeat="column in selectedTwo" ng-bind="rowData[column.columnName]"></td>
+                        <td ng-repeat="column in selectedTwo" ng-bind="rowData[column.columnName]">
+                            <i ng-if="column.type==0">
+                                <span ng-bind="rowData[column.columnName]"></span>
+                            </i>
+                            <i ng-if="column.type==1">
+                                <event-manage eventData="column"></event-manage>
+                            </i>
+                        </td>
                     </tr>
                 </table>
             </div>
