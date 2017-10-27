@@ -1,0 +1,26 @@
+<div id="table-production">
+    <div class="table-head">
+        <i ng-repeat="event in setTable.event"><event-manage eventData="event"></event-manage></i>
+    </div>
+    <table id="productTable" ng-class="setTable.tableClass">
+        <tr>
+            <th ng-repeat="column in setTable.columns" ng-bind="column.alias?column.alias:column.columnName"></th>
+        </tr>
+        <tr ng-repeat="rowData in dataTable">
+            <td ng-repeat="column in setTable.columns" ng-bind="rowData[column.columnName]">
+                <i ng-if="column.type==0">
+                    <span ng-bind="rowData[column.columnName]"></span>
+                </i>
+                <i ng-if="column.type==1">
+                    <event-manage eventData="column"></event-manage>
+                </i>
+            </td>
+        </tr>
+    </table>
+    <div class="table-footer">
+        <i ng-if="setTable.pageSeting">
+            <paging-manage setData = "setTable.pageSeting"></paging-manage>
+        </i>
+
+    </div>
+</div>

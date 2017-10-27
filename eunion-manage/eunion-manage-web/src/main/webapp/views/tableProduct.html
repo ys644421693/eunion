@@ -73,7 +73,7 @@
                     <tr ng-repeat="columnInfo in selectedTwo">
                         <th><span ng-bind="columnInfo.index = $index"></span></th>
                         <!--普通列-->
-                        <td ng-if="columnInfo.type==null"><span ng-bind="columnInfo.columnName"></span></td>
+                        <td ng-if="columnInfo.type == 0 "><span ng-bind="columnInfo.columnName"></span></td>
                         <td ng-if="columnInfo.type==2 || columnInfo.type==1"><input type="text" ng-model="columnInfo.columnName"></td>
                         <td><input type="text" ng-model="columnInfo.alias"></td>
                         <td>
@@ -118,6 +118,7 @@
         </div>
 
     </div>
+    <table-manage></table-manage>
     <div class="row-fluid" ng-if="viewSelect == 1">
         <div class="col-sm-offset-1 col-sm-10">
             <div class="panel panel-default">
@@ -128,30 +129,39 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="tableStyle">
-                            <li ng-click="tableClass = 'table';"><span>默认</span></li>
-                            <li ng-click="tableClass = 'table table-striped';"><span>条纹状表格</span></li>
-                            <li ng-click="tableClass = 'table table-bordered';"><span>带边框的表格</span></li>
-                            <li ng-click="tableClass = 'table table-hover';"><span>鼠标悬停</span></li>
-                            <li ng-click="tableClass = 'table table-condensed';"><span>紧缩表格</span></li>
-                            <li ng-click="tableClass = 'fullwidth';"><span>黑白表格</span></li>
+                            <li ng-click="selectedTwo.tableClass = 'table';"><span>默认</span></li>
+                            <li ng-click="selectedTwo.tableClass = 'table table-striped';"><span>条纹状表格</span></li>
+                            <li ng-click="selectedTwo.tableClass = 'table table-bordered';"><span>带边框的表格</span></li>
+                            <li ng-click="selectedTwo.tableClass = 'table table-hover';"><span>鼠标悬停</span></li>
+                            <li ng-click="selectedTwo.tableClass = 'table table-condensed';"><span>紧缩表格</span></li>
+                            <li ng-click="selectedTwo.tableClass = 'fullwidth';"><span>黑白表格</span></li>
                         </ul>
                     </div>
                 </div>
-                <table id="productTable" ng-class="tableClass">
-                    <tr>
-                        <th ng-repeat="column in selectedTwo" ng-bind="column.alias?column.alias:column.columnName"></th>
-                    </tr>
-                    <tr ng-repeat="rowData in dataViewTable">
-                        <td ng-repeat="column in selectedTwo" ng-bind="rowData[column.columnName]">
-                            <i ng-if="column.type==0">
-                                <span ng-bind="rowData[column.columnName]"></span>
-                            </i>
-                            <i ng-if="column.type==1">
-                                <event-manage eventData="column"></event-manage>
-                            </i>
-                        </td>
-                    </tr>
-                </table>
+                <div id="table-production">
+                    <div class="table-head">
+                        <i><event-manage eventData="column"></event-manage></i>
+                    </div>
+                    <table id="productTable" ng-class="tableClass">
+                        <tr>
+                            <th ng-repeat="column in selectedTwo" ng-bind="column.alias?column.alias:column.columnName"></th>
+                        </tr>
+                        <tr ng-repeat="rowData in dataViewTable">
+                            <td ng-repeat="column in selectedTwo" ng-bind="rowData[column.columnName]">
+                                <i ng-if="column.type==0">
+                                    <span ng-bind="rowData[column.columnName]"></span>
+                                </i>
+                                <i ng-if="column.type==1">
+                                    <event-manage eventData="column"></event-manage>
+                                </i>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="table-footer">
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

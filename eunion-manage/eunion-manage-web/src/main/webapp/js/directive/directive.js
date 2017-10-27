@@ -176,7 +176,6 @@ define(['./module', 'jquery'], function (commonDirective) {
                 $scope.dataInfo = [];
                 $scope.selectedTwo = [];
                 $scope.viewSelect = 0;
-                $scope.tableClass = "table";
                 $scope.serviceObj = {};
                 $scope.mapProperties = [];
 
@@ -196,6 +195,7 @@ define(['./module', 'jquery'], function (commonDirective) {
                         };
                         $scope.selectedTwo.push(tp);
                     }
+                    console.log($scope.selectedTwo);
                    /* operaByFunctionNameService.get({NAME: "table", METHOD: "getDataByTableName"}, dt, function (data) {
                         if (data.length <= 0) {
                             if($scope.selectedTwo.length > 0)
@@ -229,7 +229,10 @@ define(['./module', 'jquery'], function (commonDirective) {
                     $scope.selectedTwo.sort(function(a,b){return a.index-b.index});
                     operaByFunctionName.get({NAME: $scope.serviceObj.serviceSpace, METHOD: $scope.serviceObj.serviceName}, function (data) {
                         $scope.dataViewTable = data;
-                        console.log(data);
+                        //
+                        $scope.setTable = angular.copy($scope.selectedTwo);
+                        //向table中广播数据
+                        $scope.$broadcast("pageData", $scope.dataViewTable);
                     });
                 };
 

@@ -1,9 +1,9 @@
 define(['./module', 'jquery'], function (commonDirective) {
     'use strict';
 
-    commonDirective.directive('tableManage', ['$compile', '$templateCache', function ($compile, $templateCache) {
+    commonDirective.directive('pagingManage', ['$compile', '$templateCache', function ($compile, $templateCache) {
         function getTemplate($scope) {
-            var template = "/page/component/baseTable.html";
+            var template = "/page/component/basePaging.html";
             console.log($scope);
             /*switch ($scope.type){
                 case 1:
@@ -24,21 +24,10 @@ define(['./module', 'jquery'], function (commonDirective) {
                 };
             },
             link: function ($scope, $element, $attr) {
+                $scope.dataTable={};
 
-                if (!$scope.setTable){
-                    $scope.setTable = {};
-                    $scope.setTable.tableClass = "table";
-                }
-
-                $scope.$on("pageData", function (event, data) {
-                    console.log("截获外部传入数据",data);
-                    $scope.dataTable = data;
-                });
-
-                $scope.$on("setTable", function (event, data) {
-                    console.log("截获设置table传入数据",data);
-                    $scope.setTable = data;
-                });
+                //向表格传递数据
+                $scope.$emit("pageData", { divName: "Self", description: "向父传播数据" });
             }
         }
     }]);
