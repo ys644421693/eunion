@@ -289,27 +289,21 @@ define(['./module', 'jquery'], function (commonDirective) {
 
                 $scope.event = {};
                 $scope.addColumns= function (type) {
-                    for (var temp = 0;temp < $scope.selectedTwo.length ; temp++){
-                        if($scope.selectedTwo[temp].type == type){
-                            var event = {
-                                'eventType':0,
-                                'eventName':'',
-                                'eventSpace':'',
-                                'eventService':'',
-                                'eventClass':'',
-                                'eventIcon':'',
-                                'eventDescription':''
-                            };
-                            $scope.selectedTwo[temp].event.push();
-                        }else{
-                            var tmp = {
-                                'type':type,
-                                'columnName':'',
-                                'event':[]
-                            };
-                            tmp.event.push(angular.copy($scope.event));
-                            $scope.event = {};
-                            $scope.selectedTwo.push(tmp);
+                    if (type==1){
+                        for (var temp = 0;temp < $scope.selectedTwo.length ; temp++){
+                            if($scope.selectedTwo[temp].type == type){
+                                $scope.selectedTwo[temp].event.push(angular.copy($scope.event));
+                                $scope.event = {};
+                            }else{
+                                var tmp = {
+                                    'type':type,
+                                    'columnName':'',
+                                    'event':[]
+                                };
+                                tmp.event.push(angular.copy($scope.event));
+                                $scope.event = {};
+                                $scope.selectedTwo.push(tmp);
+                            }
                         }
                     }
 
