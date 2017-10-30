@@ -178,7 +178,7 @@ define(['./module', 'jquery'], function (commonDirective) {
                 $scope.viewSelect = 0;
                 $scope.serviceObj = {};
                 $scope.mapProperties = [];
-
+                $scope.setTable = {};
                 operaByFunctionName.get({NAME: "table", METHOD: "getTableInfo"}, function (data) {
                     $scope.dataTable = data;
                 });
@@ -230,7 +230,7 @@ define(['./module', 'jquery'], function (commonDirective) {
                     operaByFunctionName.get({NAME: $scope.serviceObj.serviceSpace, METHOD: $scope.serviceObj.serviceName}, function (data) {
                         $scope.dataViewTable = data;
                         //
-                        $scope.setTable = angular.copy($scope.selectedTwo);
+                        $scope.setTable.columns = angular.copy($scope.selectedTwo);
                         //向table中广播数据
                         $scope.$broadcast("pageData", $scope.dataViewTable);
                     });
@@ -248,6 +248,7 @@ define(['./module', 'jquery'], function (commonDirective) {
                         }
                     }
                 };
+
                 $scope.moveData = function (rowData,direction) {
                     //向下移动一个
                     if(direction == 1){
@@ -266,12 +267,13 @@ define(['./module', 'jquery'], function (commonDirective) {
                         }
 
                     }
-                }
+                };
 
                 $scope.addMapData = function(){
                     var temp = {"value":"","valueOriginal":""};
                     $scope.mapProperties.push(temp);
                 };
+
                 var tempRowData = null;
                 $scope.transfer = function (rowData) {
                     tempRowData = rowData;
@@ -279,16 +281,39 @@ define(['./module', 'jquery'], function (commonDirective) {
                     var temp = {"value": "", "valueOriginal": ""};
                     $scope.mapProperties.push(temp);
                 };
+
                 $scope.saveTableTransfer = function () {
                     tempRowData.transferredMeanings = $scope.mapProperties;
                     console.log(tempRowData);
                 };
+
+                $scope.event = {};
                 $scope.addColumns= function (type) {
-                    var tmp = {
-                        'type':type,
-                        'columnName':''
-                    };
-                    $scope.selectedTwo.push(tmp);
+                    for (var temp = 0;temp < $scope.selectedTwo.length ; temp++){
+                        if($scope.selectedTwo[temp].type == type){
+                            var event = {
+                                'eventType':0,
+                                'eventName':'',
+                                'eventSpace':'',
+                                'eventService':'',
+                                'eventClass':'',
+                                'eventIcon':'',
+                                'eventDescription':''
+                            };
+                            $scope.selectedTwo[temp].event.push();
+                        }else{
+                            var tmp = {
+                                'type':type,
+                                'columnName':'',
+                                'event':[]
+                            };
+                            tmp.event.push(angular.copy($scope.event));
+                            $scope.event = {};
+                            $scope.selectedTwo.push(tmp);
+                        }
+                    }
+
+
                 };
             }
         }

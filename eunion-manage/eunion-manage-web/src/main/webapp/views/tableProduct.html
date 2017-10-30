@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="pageStyle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="pageStyle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <span style="color: #FFFFFF"><i class="fa fa-file-code-o fa-fw"></i>分页控件</span>
                                 <span class="caret"></span>
                             </button>
@@ -57,8 +57,8 @@
                             </ul>
                         </div>
                     </div>
-                    <button class="btn btn-primary" ng-click="addColumns(1)" >添加事件</button>
-                    <button class="btn btn-primary" ng-click="addColumns(2)" >添加列</button>
+                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addEvent">添加事件</button>
+                    <button class="btn btn-primary btn-sm" ng-click="addColumns(2)" >添加列</button>
                 </form>
 
                 <!-- Table -->
@@ -118,7 +118,7 @@
         </div>
 
     </div>
-    <table-manage></table-manage>
+
     <div class="row-fluid" ng-if="viewSelect == 1">
         <div class="col-sm-offset-1 col-sm-10">
             <div class="panel panel-default">
@@ -129,39 +129,73 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="tableStyle">
-                            <li ng-click="selectedTwo.tableClass = 'table';"><span>默认</span></li>
-                            <li ng-click="selectedTwo.tableClass = 'table table-striped';"><span>条纹状表格</span></li>
-                            <li ng-click="selectedTwo.tableClass = 'table table-bordered';"><span>带边框的表格</span></li>
-                            <li ng-click="selectedTwo.tableClass = 'table table-hover';"><span>鼠标悬停</span></li>
-                            <li ng-click="selectedTwo.tableClass = 'table table-condensed';"><span>紧缩表格</span></li>
-                            <li ng-click="selectedTwo.tableClass = 'fullwidth';"><span>黑白表格</span></li>
+                            <li ng-click="setTable.tableClass = 'table';"><span>默认</span></li>
+                            <li ng-click="setTable.tableClass = 'table table-striped';"><span>条纹状表格</span></li>
+                            <li ng-click="setTable.tableClass = 'table table-bordered';"><span>带边框的表格</span></li>
+                            <li ng-click="setTable.tableClass = 'table table-hover';"><span>鼠标悬停</span></li>
+                            <li ng-click="setTable.tableClass = 'table table-condensed';"><span>紧缩表格</span></li>
+                            <li ng-click="setTable.tableClass = 'fullwidth';"><span>黑白表格</span></li>
                         </ul>
                     </div>
                 </div>
-                <div id="table-production">
-                    <div class="table-head">
-                        <i><event-manage eventData="column"></event-manage></i>
-                    </div>
-                    <table id="productTable" ng-class="tableClass">
-                        <tr>
-                            <th ng-repeat="column in selectedTwo" ng-bind="column.alias?column.alias:column.columnName"></th>
-                        </tr>
-                        <tr ng-repeat="rowData in dataViewTable">
-                            <td ng-repeat="column in selectedTwo" ng-bind="rowData[column.columnName]">
-                                <i ng-if="column.type==0">
-                                    <span ng-bind="rowData[column.columnName]"></span>
-                                </i>
-                                <i ng-if="column.type==1">
-                                    <event-manage eventData="column"></event-manage>
-                                </i>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="table-footer">
+                <table-manage></table-manage>
+            </div>
+        </div>
+    </div>
 
+    <div class="modal fade" id="addEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="eventTitle">添加列事件</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="event-name">事件名称</span>
+                        <input type="text" class="form-control" placeholder="事件名称" aria-describedby="event-name" ng-model="event.eventName">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="event-type">事件类型</span>
+                        <select class="form-control" id="unitItem" ng-model="event.type">
+                            <option value="" selected>--请选择--</option>
+                            <option value="0" selected>调用服务按钮</option>
+                            <option value="1" >弹窗按钮</option>
+                            <option value="2" ></option>
+                            <option value="3" ></option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="event-space">服务空间</span>
+                        <input type="text" class="form-control" placeholder="服务Space" aria-describedby="event-space" ng-model="event.eventSpace">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="event-service">事件服务</span>
+                        <input type="text" class="form-control" placeholder="事件服务" aria-describedby="event-service" ng-model="event.eventService">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="event-class">控件样式</span>
+                        <input type="text" class="form-control" placeholder="控件样式" aria-describedby="event-class" ng-model="event.eventClass">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="event-icon">控件图标</span>
+                        <input type="text" class="form-control" placeholder="控件图标" aria-describedby="event-icon" ng-model="event.eventIcon">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="event-description">控件描述</span>
+                        <input type="text" class="form-control" placeholder="控件描述" aria-describedby="event-description" ng-model="event.eventDescription">
                     </div>
                 </div>
-
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="addColumns(1)">保存</button>
+                </div>
             </div>
         </div>
     </div>

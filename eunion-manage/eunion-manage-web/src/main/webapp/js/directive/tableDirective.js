@@ -29,6 +29,9 @@ define(['./module', 'jquery'], function (commonDirective) {
                     $scope.setTable = {};
                     $scope.setTable.tableClass = "table";
                 }
+                if(!$scope.setTable.tableClass){
+                    $scope.setTable.tableClass = "table";
+                }
 
                 $scope.$on("pageData", function (event, data) {
                     console.log("截获外部传入数据",data);
